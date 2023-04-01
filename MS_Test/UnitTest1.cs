@@ -5,7 +5,7 @@ namespace MS_Test
     public class Tests
     {
         //TC1.1
-       [Test]
+        [Test]
         public void GivenSadMood_WhenAnalyze_shouldReturnSad()
         {
             string message = "I am in Sad Mood";
@@ -23,6 +23,17 @@ namespace MS_Test
             string result = moodAnalyzer.AnalyzeMood();
 
             Assert.AreEqual("HAPPY", result);
+        }
+        //TC 2.1
+        [Test]
+        public void GivenNullMood_WhenAnalyze_shouldReturnSad()
+        {
+
+            string message = null;
+            MoodAnalyzer moodAnalyzer = new MoodAnalyzer(message);
+            string result = moodAnalyzer.AnalyzeMood();
+            Assert.AreEqual("HAPPY", result);
+
         }
     }
 }
