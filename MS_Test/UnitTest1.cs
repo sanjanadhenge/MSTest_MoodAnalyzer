@@ -9,18 +9,18 @@ namespace MS_Test
         public void GivenSadMood_WhenAnalyze_shouldReturnSad()
         {
             string message = "I am in Sad Mood";
-            MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
-            string result1 = moodAnalyzer.AnalyzeMood(message);
+            MoodAnalyzer moodAnalyzer = new MoodAnalyzer(message);
+            string result1 = moodAnalyzer.AnalyzeMood();
 
             Assert.AreEqual("SAD", result1);
         }
         //TC1.2
         [Test]
-        public void GivenAnyMood_WhenAnalyze_shouldReturnSad()
+        public void GivenHappyMood_WhenAnalyze_shouldReturnSad()
         {
-            string message = "I am in Any Mood";
-            MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
-            string result = moodAnalyzer.AnalyzeMood(message);
+            string message = "I am in Happy Mood";
+            MoodAnalyzer moodAnalyzer = new MoodAnalyzer(message);
+            string result = moodAnalyzer.AnalyzeMood();
 
             Assert.AreEqual("HAPPY", result);
         }
