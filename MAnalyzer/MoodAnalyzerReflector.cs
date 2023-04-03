@@ -10,6 +10,27 @@ namespace MAnalyzer
 {
     public class MoodAnalyzerReflector
     {
+        public static string ChangeMoodDyanmically(string fieldName,string message)
+        {
+            try
+            {
+                MoodAnalyzer moodAnalyze = new MoodAnalyzer(message);
+                Type type = typeof(MoodAnalyzer);
+                FieldInfo fieldInfo = type.GetField(fieldName);
+                if(message == null)
+                {
+                    throw new MoodAnalyzerException(MoodAnalyzerException.ExceptionType.NO_SUCH_FIELD, "Message should not be null");
+                }
+                message = InvokeMethod(message, "AnalyzeMood1");
+                fieldInfo.SetValue(moodAnalyze, message);
+                
+                return moodAnalyze.message;
+            }
+            catch(NullReferenceException)
+            {
+                throw new MoodAnalyzerException(MoodAnalyzerException.ExceptionType.NO_SUCH_FIELD, "Field Not Found");
+            }
+        }
         public static string InvokeMethod(string message,string methodName)
         {
             try

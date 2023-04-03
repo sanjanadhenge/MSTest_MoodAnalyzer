@@ -106,6 +106,8 @@ namespace MS_Test
                 Assert.AreEqual(ex.Message, "Constructor Not Found");
             }
         }
+
+
         //TC6.1
         [Test]
         public void GivenMessageHappy_WhenAnalyze_ShouldReturnHappyUsingInvoke()
@@ -129,6 +131,43 @@ namespace MS_Test
             }
 
         }
+        //TC7.1
+        [Test]
+        public void GivenHappyMessage_WhenAnalyze_ShouldReturnHappyusingFieldValue()
+        {
+            string result = MoodAnalyzerReflector.ChangeMoodDyanmically("message", "Happy");
+            Assert.AreEqual("HAPPY", result);
+        }
+        //TC7.2
+        [Test]
+        public void GivenImproperField_WhenAnalyze_ShouldThrowException()
+        {
+            try
+            {
+                string result = MoodAnalyzerReflector.ChangeMoodDyanmically("Text", "Happy");
+                Assert.AreEqual("HAPPY", result);
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual(ex.Message, "Field Not Found");
+            }
 
+        }
+
+        //TC7.3
+        [Test]
+        public void GivenNullMessage_WhenAnalyze_ShouldThrowException()
+        {
+            try
+            {
+                string result = MoodAnalyzerReflector.ChangeMoodDyanmically("message", null);
+                Assert.AreEqual("HAPPY", result);
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual(ex.Message, "Message should not be null");
+            }
+
+        }
     }
 }
