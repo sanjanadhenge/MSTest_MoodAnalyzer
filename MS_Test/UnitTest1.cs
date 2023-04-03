@@ -62,7 +62,7 @@ namespace MS_Test
         {
             string message = null;
             object expected = new MoodAnalyzer(message);
-            object obj = MoodAnalyzerFactory.CreateMoodAnalyze("MAnalyzer.MoodAnalyzer", "MoodAnalyzer");
+            object obj = MoodAnalyzerReflector.CreateMoodAnalyze("MAnalyzer.MoodAnalyzer", "MoodAnalyzer");
             expected.Equals(obj);
           //Assert.AreEqual(expected, obj);
                 
@@ -72,7 +72,7 @@ namespace MS_Test
         public void GivenClassName_WhenAnalyze_ShouldReturnMoodAnalyzeObjectUsingParamertizedConstructor()
         {
             object expected = new MoodAnalyzer("HAPPY");
-            object obj = MoodAnalyzerFactory.CreateMoodAnalyzeUsingParameterizedConstructor("MAnalyzer.MoodAnalyzer", "MoodAnalyzer", "HAPPY");
+            object obj = MoodAnalyzerReflector.CreateMoodAnalyzeUsingParameterizedConstructor("MAnalyzer.MoodAnalyzer", "MoodAnalyzer", "HAPPY");
             expected.Equals(obj);
 
         }
@@ -83,7 +83,7 @@ namespace MS_Test
             try
             {
                 object expected = new MoodAnalyzer("HAPPY");
-                object obj = MoodAnalyzerFactory.CreateMoodAnalyzeUsingParameterizedConstructor("MAnalyzer.Moodanalyze", "MoodAnalyzer", "HAPPY");
+                object obj = MoodAnalyzerReflector.CreateMoodAnalyzeUsingParameterizedConstructor("MAnalyzer.Moodanalyze", "MoodAnalyzer", "HAPPY");
                 expected.Equals(obj);
             }
             catch (Exception ex)
@@ -98,7 +98,7 @@ namespace MS_Test
             try
             {
                 object expected = new MoodAnalyzer("HAPPY");
-                object obj = MoodAnalyzerFactory.CreateMoodAnalyzeUsingParameterizedConstructor("MAnalyzer.MoodAnalyzer", "Moodanalyzer", "HAPPY");
+                object obj = MoodAnalyzerReflector.CreateMoodAnalyzeUsingParameterizedConstructor("MAnalyzer.MoodAnalyzer", "Moodanalyzer", "HAPPY");
                 expected.Equals(obj);
             }
             catch (Exception ex)
@@ -106,5 +106,29 @@ namespace MS_Test
                 Assert.AreEqual(ex.Message, "Constructor Not Found");
             }
         }
+        //TC6.1
+        [Test]
+        public void GivenMessageHappy_WhenAnalyze_ShouldReturnHappyUsingInvoke()
+        {
+            string result = MoodAnalyzerReflector.InvokeMethod("Happy", "AnalyzeMood1");
+            Assert.AreEqual("HAPPY", result);
+           
+        }
+        //TC6.2
+        [Test]
+        public void GivenWrongMethod_WhenAnalyze_ShouldThrowException()
+        {
+            try
+            {
+                string result = MoodAnalyzerReflector.InvokeMethod("Happy", "Analyze_Mood");
+                Assert.AreEqual("HAPPY", result);
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual(ex.Message, "Method Not Found");
+            }
+
+        }
+
     }
 }
