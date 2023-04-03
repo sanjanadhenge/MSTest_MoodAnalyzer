@@ -67,5 +67,40 @@ namespace MS_Test
           //Assert.AreEqual(expected, obj);
                 
         }
+        //TC4.2
+        [Test]
+        public void GivenClassNameImproper_WhenAnalyze_ShouldThrowException()
+        {
+            try
+            {
+                string message = null;
+                object expected = new MoodAnalyzer(message);
+                object obj = MoodAnalyzerFactory.CreateMoodAnalyze("MAnalyzer.Mood_analyzer", "MoodAnalyzer");
+                expected.Equals(obj);
+                //Assert.AreEqual(expected, obj);
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual(ex.Message, "Class Not Found");
+            }
+        }
+        //TC4.3
+        [Test]
+        public void GivenConstructorNameImproper_WhenAnalyze_ShouldThrowException()
+        {
+            try
+            {
+                string message = null;
+                object expected = new MoodAnalyzer(message);
+                object obj = MoodAnalyzerFactory.CreateMoodAnalyze("MAnalyzer.MoodAnalyzer", "Mood_analyzer");
+                expected.Equals(obj);
+                //Assert.AreEqual(expected, obj);
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual(ex.Message, "Constructor Not Found");
+            }
+        }
+
     }
 }

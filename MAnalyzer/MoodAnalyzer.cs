@@ -11,7 +11,7 @@
         {
             try
             {
-                if (message.ToLower().Contains("Sad"))
+                if (message.ToLower().Contains("sad"))
                 {
                     return "SAD";
                 }
