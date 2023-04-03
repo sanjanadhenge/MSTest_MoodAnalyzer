@@ -67,5 +67,13 @@ namespace MS_Test
           //Assert.AreEqual(expected, obj);
                 
         }
+        [Test]
+        public void GivenClassName_WhenAnalyze_ShouldReturnMoodAnalyzeObjectUsingParamertizedConstructor()
+        {
+            object expected = new MoodAnalyzer("HAPPY");
+            object obj = MoodAnalyzerFactory.CreateMoodAnalyzeUsingParameterizedConstructor("MAnalyzer.MoodAnalyzer", "MoodAnalyzer", "HAPPY");
+            expected.Equals(obj);
+
+        }
     }
 }

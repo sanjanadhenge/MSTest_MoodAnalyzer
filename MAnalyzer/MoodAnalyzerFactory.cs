@@ -10,9 +10,29 @@ namespace MAnalyzer
 {
     public class MoodAnalyzerFactory
     {
-        public MoodAnalyzerFactory() 
+       public static object CreateMoodAnalyzeUsingParameterizedConstructor(string className, string constructorName,string message)
         {
-            
+            Type type = typeof(MoodAnalyzer);
+            if(type.Name.Equals(className) || type.FullName.Equals(className))
+            {
+                if(type.Name.Equals(constructorName))
+                {
+                    ConstructorInfo ctor = type.GetConstructor(new Type[] { typeof(string) });
+                    object instance = ctor.Invoke(new object[] { "HAPPY" });
+                    return instance;
+
+                }
+                else
+                {
+                    throw new MoodAnalyzerException(MoodAnalyzerException.ExceptionType.NO_SUCH_METHOD, "Constructor Not Found");
+                }
+            }
+            else
+            {
+                throw new MoodAnalyzerException(MoodAnalyzerException.ExceptionType.NO_SUCH_CLASS, "Class Not Found");
+            }
+
+
         }
         public  static object CreateMoodAnalyze(string className ,string constructorName)
         {
