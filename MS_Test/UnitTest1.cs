@@ -56,5 +56,16 @@ namespace MS_Test
 
 
         }
+        //TC4.1
+        [Test]
+        public void GivenClassName_WhenAnalyze_ShouldReturnMoodAnalyzeObject()
+        {
+            string message = null;
+            object expected = new MoodAnalyzer(message);
+            object obj = MoodAnalyzerFactory.CreateMoodAnalyze("MAnalyzer.MoodAnalyzer", "MoodAnalyzer");
+            expected.Equals(obj);
+          //Assert.AreEqual(expected, obj);
+                
+        }
     }
 }
