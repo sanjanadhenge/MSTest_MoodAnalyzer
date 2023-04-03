@@ -67,6 +67,7 @@ namespace MS_Test
           //Assert.AreEqual(expected, obj);
                 
         }
+        //TC5.1
         [Test]
         public void GivenClassName_WhenAnalyze_ShouldReturnMoodAnalyzeObjectUsingParamertizedConstructor()
         {
@@ -74,6 +75,36 @@ namespace MS_Test
             object obj = MoodAnalyzerFactory.CreateMoodAnalyzeUsingParameterizedConstructor("MAnalyzer.MoodAnalyzer", "MoodAnalyzer", "HAPPY");
             expected.Equals(obj);
 
+        }
+        //TC5.2
+        [Test]
+        public void GivenImproperClassName_WhenAnalyze_ShouldReturnMoodAnalyzeObjectUsingParamertizedConstructor()
+        {
+            try
+            {
+                object expected = new MoodAnalyzer("HAPPY");
+                object obj = MoodAnalyzerFactory.CreateMoodAnalyzeUsingParameterizedConstructor("MAnalyzer.Moodanalyze", "MoodAnalyzer", "HAPPY");
+                expected.Equals(obj);
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual(ex.Message, "Class Not Found");
+            }
+        }
+        //TC5.3
+        [Test]
+        public void GivenImproperConstructorName_WhenAnalyze_ShouldReturnMoodAnalyzeObjectUsingParamertizedConstructor()
+        {
+            try
+            {
+                object expected = new MoodAnalyzer("HAPPY");
+                object obj = MoodAnalyzerFactory.CreateMoodAnalyzeUsingParameterizedConstructor("MAnalyzer.MoodAnalyzer", "Moodanalyzer", "HAPPY");
+                expected.Equals(obj);
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual(ex.Message, "Constructor Not Found");
+            }
         }
     }
 }
